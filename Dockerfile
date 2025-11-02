@@ -16,11 +16,14 @@ RUN pip install --no-cache-dir -r requirements.txt && pip install gunicorn
 # Copy project files
 COPY . .
 
-# Collect static files (inside your Django project folder)
+# Collect static files
 RUN python transatioional_webhook/manage.py collectstatic --noinput || echo "No static files"
+
+# Move to Django project directory
+WORKDIR /app/transatioional_webhook
 
 # Expose port
 EXPOSE 8000
 
-# Start app with gunicorn
+# Run app
 CMD gunicorn transatioional_webhook.wsgi:application --bind 0.0.0.0:8000

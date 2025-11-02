@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r ./transactional_webhook/requirements.txt && pip install gunicorn
+RUN pip install --no-cache-dir -r requirements.txt && pip install gunicorn
 
 # Copy project files
 COPY . .
